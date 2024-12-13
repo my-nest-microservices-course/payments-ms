@@ -1,0 +1,23 @@
+
+
+
+### Create payment session
+POST http://localhost:3003/payments/create-payment-session
+Content-Type: application/json
+
+{
+  "orderId": "order_123_TESTING",
+  "currency": "usd",
+  "item": [
+    {
+      "name": "T-shirt",
+      "quantity": 1,
+      "price": 20.99
+    }
+
+  ] 
+} 
+
+
+### hkdk.events
+POST https://hkdk.events/03lb3bh4f856it
