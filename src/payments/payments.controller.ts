@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { PaymentSessionDto } from './dto/payment-session.dto';
 import { PaymentsService } from './payments.service';
 
@@ -6,8 +7,11 @@ import { PaymentsService } from './payments.service';
 export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
-  @Post('create-payment-session')
-  createPaymentSession(@Body() paymentSessionDto: PaymentSessionDto) {
+  @MessagePattern({ cmd: 'create.payment.session' }) // use dots because a convention in nats
+  createPaymentSession(@Payload() paymentSessionDto: PaymentSessionDto) {
+    //TODO log correctly the error if the validation fails, because now has this kind of message: "message": "Internal server error", when it should said something like:  "items.0.productId must be a positive number",
+    //     test with "item" instead of "itemS" (the correct name is "items")
+
     return this.paymentsService.createPaymentSession(paymentSessionDto);
   }
 
