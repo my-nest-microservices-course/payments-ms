@@ -34,6 +34,7 @@ async function bootstrap() {
   await app.startAllMicroservices();
   await app.listen(envs.port);
   logger.log(`Server is running on: ${envs.port}`);
+  logger.warn(`process.env.NODE_ENV: ${process.env.NODE_ENV}`);
   if (process.env.NODE_ENV === 'development') {
     logger.warn(
       `DEV MODE. Remember to up hookdeck. If needed instructions go to README.md `,

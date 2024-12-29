@@ -18,6 +18,10 @@ Content-Type: application/json
   ] 
 } 
 
+### Get webhook
+POST http://localhost:32699/payments/webhook
+
+
 
 ### hkdk.events
 POST https://hkdk.events/03lb3bh4f856it
